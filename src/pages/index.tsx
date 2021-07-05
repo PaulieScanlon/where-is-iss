@@ -1,5 +1,8 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
+import { Box } from 'theme-ui'
 import axios from 'axios'
+
+import { ThreeScene } from '../components/three-scene'
 
 interface IssNow {
   message: string
@@ -30,12 +33,20 @@ const IndexPage: FunctionComponent = () => {
 
   return (
     <main>
-      <h1>Index Page</h1>
-      {isLoading ? <p>Loading ...</p> : null}
-      {hasError ? <p>Error</p> : null}
-      {!isLoading && !hasError && issNow ? (
-        <pre>{JSON.stringify(issNow, null, 2)}</pre>
-      ) : null}
+      <Box
+        sx={{
+          position: 'absolute',
+          zIndex: 1,
+        }}
+      >
+        <h1>Index Page</h1>
+        {isLoading ? <p>Loading ...</p> : null}
+        {hasError ? <p>Error</p> : null}
+        {!isLoading && !hasError && issNow ? (
+          <pre>{JSON.stringify(issNow, null, 2)}</pre>
+        ) : null}
+      </Box>
+      <ThreeScene />
     </main>
   )
 }

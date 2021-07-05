@@ -23,10 +23,15 @@
   },
   "homepage": "https://github.com/PaulieScanlon/where-is-iss#readme",
   "dependencies": {
+    "@react-three/fiber": "^7.0.2",
     "axios": "^0.21.1",
     "gatsby": "^3.8.1",
+    "gatsby-plugin-theme-ui": "^0.10.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "theme-ui": "^0.10.0",
+    "three": "^0.130.0",
+    "topojson-client": "^3.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
