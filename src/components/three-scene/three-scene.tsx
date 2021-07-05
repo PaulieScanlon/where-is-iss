@@ -1,4 +1,5 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { Fragment, FunctionComponent, useEffect, useState } from 'react'
+import { GeoJsonGeometry } from 'three-geojson-geometry'
 import { Box } from 'theme-ui'
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
@@ -6,11 +7,14 @@ import * as topojson from 'topojson-client'
 
 import theme from '../../gatsby-plugin-theme-ui'
 
+// @ts-ignore
+// import geoJson from '../../geoJson/CNTR_BN_01M_2020_4326.geojson'
+
 import axios from 'axios'
 
 const Land = () => {
-  const radius = 2.5
   const [mesh, setMesh] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   const vertex = ([longitude, latitude], radius) => {
     return new THREE.Vector3().setFromSpherical(
@@ -26,6 +30,7 @@ const Land = () => {
     axios
       .get('https://cdn.jsdelivr.net/npm/world-atlas@2/land-50m.json')
       .then((response) => {
+        setIsLoading(false)
         setMesh(
           topojson.mesh(response.data, response.data.objects.land).coordinates
         )
@@ -36,9 +41,7 @@ const Land = () => {
       })
   }, [])
 
-  if (!mesh) return null
-
-  const points = () => {
+  const points = (radius: number) => {
     return mesh
       .map((P: any) => {
         return P.map((_: any, i: number) => {
@@ -48,49 +51,58 @@ const Land = () => {
       .flat()
   }
 
-  const material = new THREE.LineBasicMaterial({
-    color: 0xff0000,
-  })
-
-  const geometry = new THREE.BufferGeometry().setFromPoints(points())
-  return <mesh material={material} geometry={geometry} />
-
-  // const vertex = ([longitude, latitude], radius) => {
-  //   const lambda = (longitude * Math.PI) / 180
-  //   const phi = (latitude * Math.PI) / 180
-  //   return new THREE.Vector3(
-  //     radius * Math.cos(phi) * Math.cos(lambda),
-  //     radius * Math.sin(phi),
-  //     -radius * Math.cos(phi) * Math.sin(lambda)
-  //   )
-  // }
-
-  // const points = () => {
-  //   const points = []
-
-  //   // @ts-ignore
-  //   if (mesh) {
-  //     for (const P of mesh) {
-  //       for (let p0, p1 = vertex(P[0], radius), i = 1; i < P.length; ++i) {
-  //         points.push((p0 = p1), (p1 = vertex(P[i], radius)))
-  //       }
-  //     }
-  //     return points
-  //   }
-  //   return null
-  // }
-
-  // const material = new THREE.LineBasicMaterial({
-  //   color: 0x0000ff,
-  // })
-
-  // if (mesh) {
-  //   const geometry = new THREE.BufferGeometry().setFromPoints(points().flat())
-  //   console.log(geometry)
-  //   return <mesh material={material} geometry={geometry} />
-  // }
+  return (
+    <Fragment>
+      {!isLoading ? (
+        <mesh
+          geometry={new THREE.BufferGeometry().setFromPoints(points(2.5))}
+          material={
+            new THREE.LineBasicMaterial({
+              color: 0xff0000,
+            })
+          }
+        />
+      ) : null}
+    </Fragment>
+  )
 }
 
+const Geo = () => {
+  const [geoJson, setGeoJson] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    axios
+      .get(
+        'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_land.geojson'
+      )
+      .then((response) => {
+        setIsLoading(false)
+        setGeoJson(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+        throw new Error()
+      })
+  }, [])
+
+  return (
+    <line>
+      {!isLoading ? (
+        <Fragment>
+          <bufferGeometry
+            attach="geometry"
+            geometry={new GeoJsonGeometry(geoJson, 100, 72)}
+          />
+          <lineBasicMaterial
+            attach="material"
+            material={new THREE.LineBasicMaterial({ color: 0xff0000 })}
+          />
+        </Fragment>
+      ) : null}
+    </line>
+  )
+}
 export const ThreeScene: FunctionComponent = () => {
   return (
     <Box
@@ -98,6 +110,7 @@ export const ThreeScene: FunctionComponent = () => {
         position: 'absolute',
         zIndex: 0,
         canvas: {
+          border: '1px solid red',
           width: '100vw',
           height: '100vh',
         },
@@ -115,7 +128,8 @@ export const ThreeScene: FunctionComponent = () => {
           near={1}
           far={1000}
         />
-        <Land />
+        {/* <Land /> */}
+        <Geo />
       </Canvas>
     </Box>
   )

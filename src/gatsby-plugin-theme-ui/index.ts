@@ -6,6 +6,12 @@ const theme = {
       canvas: '#ffffff',
     },
   },
+
+  styles: {
+    root: {
+      m: 0,
+    },
+  },
 }
 
 export default theme
