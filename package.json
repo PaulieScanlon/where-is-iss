@@ -30,6 +30,7 @@
     "gatsby-plugin-theme-ui": "^0.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-globe.gl": "^2.18.7",
     "theme-ui": "^0.10.0",
     "three": "^0.130.0",
     "three-geojson-geometry": "^1.1.4",
