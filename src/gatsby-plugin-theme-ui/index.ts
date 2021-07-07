@@ -1,9 +1,9 @@
 const theme = {
   colors: {
-    text: '#000000',
-    background: '#ffffff',
+    text: '#ffffff',
+    background: '#000000',
     three: {
-      canvas: '#ffffff',
+      canvas: '#000000',
     },
   },
 

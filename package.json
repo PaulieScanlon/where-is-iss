@@ -24,18 +24,15 @@
   "homepage": "https://github.com/PaulieScanlon/where-is-iss#readme",
   "dependencies": {
     "@react-three/drei": "^7.0.6",
-    "@react-three/fiber": "^7.0.2",
+    "@react-three/fiber": "^7.0.3",
     "axios": "^0.21.1",
     "gatsby": "^3.8.1",
     "gatsby-plugin-theme-ui": "^0.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-globe.gl": "^2.18.7",
     "theme-ui": "^0.10.0",
-    "three": "^0.130.0",
-    "three-geojson-geometry": "^1.1.4",
-    "three-globe": "^2.18.5",
-    "topojson-client": "^3.1.0"
+    "three": "^0.130.1",
+    "three-geojson-geometry": "^1.1.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
