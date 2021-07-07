@@ -10,4 +10,5 @@ export interface IssNow {
 export interface IContextProps {
   issNow: IssNow
   isLoading: boolean
+  pollDelay?: number
 }

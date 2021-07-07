@@ -24,6 +24,7 @@ const AppContext = createContext<IContextProps>({
 export const AppProvider: FunctionComponent = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [issNow, setIssNow] = useState<IssNow>()
+  const [pollDelay] = useState(5000)
 
   const poll = () => {
     axios
@@ -41,7 +42,7 @@ export const AppProvider: FunctionComponent = ({ children }) => {
     setIsLoading(true)
     const pollInterval = setInterval(() => {
       poll()
-    }, 5000)
+    }, pollDelay)
 
     poll()
     return () => clearInterval(pollInterval)
@@ -52,6 +53,7 @@ export const AppProvider: FunctionComponent = ({ children }) => {
       value={{
         issNow: issNow,
         isLoading: isLoading,
+        pollDelay: pollDelay,
       }}
     >
       {children}

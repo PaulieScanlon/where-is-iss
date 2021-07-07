@@ -2,6 +2,8 @@ import React, { Fragment, FunctionComponent } from 'react'
 import { IContextProps } from '../../types'
 import { vertex } from '../../utils'
 
+import theme from '../../gatsby-plugin-theme-ui'
+
 interface IPointProps extends IContextProps {}
 
 export const ThreePoint: FunctionComponent<IPointProps> = ({
@@ -18,8 +20,9 @@ export const ThreePoint: FunctionComponent<IPointProps> = ({
             ...vertex(110, iss_position.latitude, iss_position.longitude),
           ]}
         >
-          <sphereGeometry args={[2, 12, 8]} />
-          <meshPhongMaterial color={0xe40b0b} />
+          {/* <sphereGeometry args={[2, 12, 8]} /> */}
+          <octahedronGeometry args={[3]} />
+          <meshPhongMaterial color={theme.colors.three.point} />
         </mesh>
       ) : null}
     </Fragment>

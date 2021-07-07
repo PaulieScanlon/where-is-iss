@@ -41,10 +41,19 @@ export const ThreeScene: FunctionComponent = () => {
                     style={{ width: '100vw', height: '100vh' }}
                   >
                     {/* @ts-ignore */}
-                    <OrbitControls enableRotate={true} enableZoom={false} />
-                    <directionalLight color={0xbbbbbb} intensity={0.8} />
-                    <ambientLight color={0xbbbbbb} />
+                    <OrbitControls
+                      enableRotate={true}
+                      enableZoom={false}
+                      enablePan={false}
+                    />
+                    <directionalLight
+                      color={theme.colors.three.geo}
+                      intensity={0.2}
+                    />
+                    <pointLight intensity={0.4} position={[300, 300, 300]} />
+                    <ambientLight color={theme.colors.three.point} />
                     <ThreeGeo />
+                    {/* @ts-ignore */}
                     <ThreePoint isLoading={isLoading} issNow={issNow} />
                     <ThreeSphere />
                   </Canvas>
