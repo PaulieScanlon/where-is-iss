@@ -33,7 +33,7 @@
     "react-spring": "^9.2.3",
     "theme-ui": "^0.10.0",
     "three": "^0.130.1",
-    "three-geojson-geometry": "^1.1.4"
+    "three-geojson-geometry": "^1.1.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",

@@ -7,6 +7,24 @@ import { useEffect } from 'react'
 
 import AppContext from '../../context/app-context'
 
+// interface ICountdownProps {
+//   duration: number
+// }
+
+// const Countdown: FunctionComponent<ICountdownProps> = ({ duration }) => {
+//   const { number } = useSpring({
+//     from: { number: duration },
+//     number: 0,
+//     config: { duration: duration },
+//   })
+
+//   return (
+//     <animated.text x="50%" y="50%" textAnchor="middle">
+//       {number.to((n) => `${Math.round(n)}s`)}
+//     </animated.text>
+//   )
+// }
+
 interface ITickerCircleProps {
   duration: number
 }
@@ -23,7 +41,7 @@ const TickerCircle: FunctionComponent<ITickerCircleProps> = ({ duration }) => {
       cx="20"
       cy="20"
       r="16"
-      opacity={0.3}
+      opacity={0.4}
       strokeWidth="0.5"
       strokeDasharray={100}
       strokeDashoffset={100}
@@ -89,6 +107,11 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({ issNow }) => {
               zIndex: 1,
               pointerEvents: 'none',
               svg: {
+                text: {
+                  fontSize: '1px',
+                  fontFamily: 'body',
+                  fill: 'three.timer',
+                },
                 circle: {
                   stroke: 'three.frame',
                   fill: 'transparent',
@@ -100,17 +123,18 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({ issNow }) => {
           >
             <svg width="100%" height="100%" viewBox="0 0 40 40">
               <TickerCircle key={`${trigger}-ticker`} duration={pollDelay} />
-              <PulseCircle key={`${trigger}-pulse`} />
+              <PulseCircle key={`${trigger}-pulse-a`} />
               <PulseCircle
-                key={`${trigger}-pulse`}
+                key={`${trigger}-pulse-b`}
                 duration={750}
                 scale={1.3}
               />
+              {/* <Countdown key={`${trigger}-text`} duration={pollDelay} /> */}
               <circle
                 cx="20"
                 cy="20"
                 r="16"
-                opacity={0.25}
+                opacity={0.35}
                 strokeWidth="1"
                 strokeDasharray={0.15}
               />

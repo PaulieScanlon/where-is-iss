@@ -1,13 +1,16 @@
 import * as THREE from 'three'
 
-export const vertex = (radius: number, latitude: number, longitude: number) => {
+export const getVertex = (
+  latitude: number,
+  longitude: number,
+  radius: number
+) => {
   const vector = new THREE.Vector3().setFromSpherical(
     new THREE.Spherical(
       radius,
-      THREE.Math.degToRad(latitude),
-      THREE.Math.degToRad(90 - longitude)
+      THREE.MathUtils.degToRad(90 - latitude),
+      THREE.MathUtils.degToRad(longitude)
     )
   )
-
-  return [vector.x, vector.y, vector.z]
+  return vector
 }

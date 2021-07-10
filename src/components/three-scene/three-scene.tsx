@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react'
+import React, { Fragment, FunctionComponent, useEffect } from 'react'
 import { Box } from 'theme-ui'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
@@ -34,10 +34,13 @@ export const ThreeScene: FunctionComponent = () => {
                   <FrameTimer issNow={issNow} />
                   <Canvas
                     gl={{ antialias: false, alpha: false }}
-                    onCreated={({ gl }) =>
+                    onCreated={({ gl }) => {
                       gl.setClearColor(theme.colors.three.canvas)
-                    }
-                    camera={{ position: [0, 0, 300], fov: 45 }}
+                    }}
+                    camera={{
+                      fov: 45,
+                      position: [0, 0, 300],
+                    }}
                     style={{ width: '100vw', height: '100vh' }}
                   >
                     {/* @ts-ignore */}
@@ -53,7 +56,6 @@ export const ThreeScene: FunctionComponent = () => {
                     <pointLight intensity={0.4} position={[300, 300, 300]} />
                     <ambientLight color={theme.colors.three.point} />
                     <ThreeGeo />
-                    {/* @ts-ignore */}
                     <ThreePoint isLoading={isLoading} issNow={issNow} />
                     <ThreeSphere />
                   </Canvas>
