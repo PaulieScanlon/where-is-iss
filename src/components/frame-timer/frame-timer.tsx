@@ -41,7 +41,7 @@ const TickerCircle: FunctionComponent<ITickerCircleProps> = ({ duration }) => {
       cx="20"
       cy="20"
       r="16"
-      opacity={0.4}
+      opacity={0.3}
       strokeWidth="0.5"
       strokeDasharray={100}
       strokeDashoffset={100}
@@ -58,7 +58,7 @@ interface ICirclePulseProps {
 
 const PulseCircle: FunctionComponent<ICirclePulseProps> = ({
   duration = 600,
-  scale = 1.6,
+  scale = 1.7,
 }) => {
   const props = useSpring({
     transform: `scale(${scale})`,
@@ -126,8 +126,13 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({ issNow }) => {
               <PulseCircle key={`${trigger}-pulse-a`} />
               <PulseCircle
                 key={`${trigger}-pulse-b`}
-                duration={750}
-                scale={1.3}
+                duration={780}
+                scale={1.5}
+              />
+              <PulseCircle
+                key={`${trigger}-pulse-c`}
+                duration={800}
+                scale={1.2}
               />
               {/* <Countdown key={`${trigger}-text`} duration={pollDelay} /> */}
               <circle

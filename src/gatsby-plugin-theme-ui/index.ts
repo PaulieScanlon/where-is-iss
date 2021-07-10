@@ -8,6 +8,7 @@ const theme = {
       frame: '#f527b9',
       // geo: '#bb4699',
       geo: '#9f65b0',
+      graticule: '#542c60',
       timer: '#cc1697',
       canvas: '#000000',
     },

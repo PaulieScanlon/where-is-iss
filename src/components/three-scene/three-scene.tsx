@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent, useEffect } from 'react'
+import React, { Fragment, FunctionComponent } from 'react'
 import { Box } from 'theme-ui'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
@@ -9,8 +9,9 @@ import AppContext from '../../context/app-context'
 
 import { FrameTimer } from '../frame-timer'
 import { ThreeGeo } from '../three-geo'
-import { ThreePoint } from '../three-point'
+import { ThreeIss } from '../three-iss'
 import { ThreeSphere } from '../three-sphere'
+import { ThreeGraticule } from '../three-graticule'
 
 import theme from '../../gatsby-plugin-theme-ui'
 
@@ -41,7 +42,7 @@ export const ThreeScene: FunctionComponent = () => {
                       fov: 45,
                       position: [0, 0, 300],
                     }}
-                    style={{ width: '100vw', height: '100vh' }}
+                    style={{ width: '100vw', height: '100vh', cursor: 'move' }}
                   >
                     {/* @ts-ignore */}
                     <OrbitControls
@@ -51,13 +52,14 @@ export const ThreeScene: FunctionComponent = () => {
                     />
                     <directionalLight
                       color={theme.colors.three.geo}
-                      intensity={0.2}
+                      intensity={0.5}
+                      position={[300, 300, 300]}
                     />
-                    <pointLight intensity={0.4} position={[300, 300, 300]} />
                     <ambientLight color={theme.colors.three.point} />
                     <ThreeGeo />
-                    <ThreePoint isLoading={isLoading} issNow={issNow} />
+                    <ThreeIss isLoading={isLoading} issNow={issNow} />
                     <ThreeSphere />
+                    <ThreeGraticule />
                   </Canvas>
                 </Fragment>
               ) : null}

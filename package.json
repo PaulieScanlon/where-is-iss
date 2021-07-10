@@ -25,7 +25,9 @@
   "dependencies": {
     "@react-three/drei": "^7.0.6",
     "@react-three/fiber": "^7.0.3",
+    "@types/d3": "^7.0.0",
     "axios": "^0.21.1",
+    "d3": "^7.0.0",
     "gatsby": "^3.8.1",
     "gatsby-plugin-theme-ui": "^0.10.1",
     "react": "^17.0.2",
