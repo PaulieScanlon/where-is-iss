@@ -7,11 +7,15 @@ import { getVertex } from '../../utils'
 
 import theme from '../../gatsby-plugin-theme-ui'
 
-interface IThreeIssProps extends IContextProps {}
+interface IThreeIssProps extends IContextProps {
+  /** The radius to use */
+  radius: number
+}
 
 export const ThreeIss: FunctionComponent<IThreeIssProps> = ({
   isLoading,
   issNow,
+  radius,
 }) => {
   const mesh = useRef<THREE.Mesh>(null!)
 
@@ -35,7 +39,7 @@ export const ThreeIss: FunctionComponent<IThreeIssProps> = ({
             position={getVertex(
               iss_position.latitude,
               iss_position.longitude,
-              110
+              radius + 20
             )}
           >
             <sphereGeometry args={[2, 24, 8]} />

@@ -1,10 +1,16 @@
 import React, { Fragment, FunctionComponent, useState, useEffect } from 'react'
 import { GeoJsonGeometry } from 'three-geojson-geometry'
+
 import axios from 'axios'
 
 import theme from '../../gatsby-plugin-theme-ui'
 
-export const ThreeGeo: FunctionComponent = () => {
+interface IThreeGeoProps {
+  /** The radius to use */
+  radius: number
+}
+
+export const ThreeGeo: FunctionComponent<IThreeGeoProps> = ({ radius }) => {
   const [geoJson, setGeoJson] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -34,7 +40,7 @@ export const ThreeGeo: FunctionComponent = () => {
             return (
               <lineSegments
                 key={index}
-                geometry={new GeoJsonGeometry(geometry, 90)}
+                geometry={new GeoJsonGeometry(geometry, radius)}
               >
                 <lineBasicMaterial color={theme.colors.three.geo} />
               </lineSegments>

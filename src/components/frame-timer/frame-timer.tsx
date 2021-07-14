@@ -84,9 +84,14 @@ const PulseCircle: FunctionComponent<ICirclePulseProps> = ({
 
 interface IFrameTimerProps {
   issNow: IssNow
+  /** The width to use */
+  width: number
 }
 
-export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({ issNow }) => {
+export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({
+  issNow,
+  width,
+}) => {
   const [trigger, setTrigger] = useState(0)
 
   useEffect(() => {
@@ -101,8 +106,9 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({ issNow }) => {
             sx={{
               position: 'absolute',
               top: 0,
-              left: 0,
-              width: '100vw',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              // width: '100vw',
               height: '100vh',
               zIndex: 1,
               pointerEvents: 'none',
@@ -121,7 +127,7 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({ issNow }) => {
               },
             }}
           >
-            <svg width="100%" height="100%" viewBox="0 0 40 40">
+            <svg width={width} height="auto" viewBox="0 0 40 40">
               <TickerCircle key={`${trigger}-ticker`} duration={pollDelay} />
               <PulseCircle key={`${trigger}-pulse-a`} />
               <PulseCircle

@@ -2,6 +2,7 @@ import React, { Fragment, FunctionComponent } from 'react'
 import { Box } from 'theme-ui'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+import { useResizeDetector } from 'react-resize-detector'
 
 import { IContextProps } from '../../types'
 
@@ -16,8 +17,37 @@ import { ThreeGraticule } from '../three-graticule'
 import theme from '../../gatsby-plugin-theme-ui'
 
 export const ThreeScene: FunctionComponent = () => {
+  const getRadius = (width) => {
+    if (width < 576) {
+      // small
+      return {
+        svg: 320,
+        three: 40,
+      }
+    } else if (width < 756) {
+      // medium
+      return {
+        svg: 570,
+        three: 70,
+      }
+    }
+    // large
+    else
+      return {
+        svg: 800,
+        three: 90,
+      }
+  }
+
+  const { width, ref } = useResizeDetector({
+    handleHeight: false,
+    refreshMode: 'debounce',
+    refreshRate: 500,
+  })
+
   return (
     <Box
+      ref={ref}
       sx={{
         position: 'absolute',
         top: 0,
@@ -32,7 +62,7 @@ export const ThreeScene: FunctionComponent = () => {
             <Fragment>
               {!isLoading ? (
                 <Fragment>
-                  <FrameTimer issNow={issNow} />
+                  <FrameTimer issNow={issNow} width={getRadius(width).svg} />
                   <Canvas
                     gl={{ antialias: false, alpha: false }}
                     onCreated={({ gl }) => {
@@ -50,16 +80,15 @@ export const ThreeScene: FunctionComponent = () => {
                       enableZoom={false}
                       enablePan={false}
                     />
-                    <directionalLight
-                      color={theme.colors.three.geo}
-                      intensity={0.5}
-                      position={[300, 300, 300]}
-                    />
                     <ambientLight color={theme.colors.three.point} />
-                    <ThreeGeo />
-                    <ThreeIss isLoading={isLoading} issNow={issNow} />
-                    <ThreeSphere />
-                    <ThreeGraticule />
+                    <ThreeGeo radius={getRadius(width).three} />
+                    <ThreeIss
+                      isLoading={isLoading}
+                      issNow={issNow}
+                      radius={getRadius(width).three}
+                    />
+                    <ThreeSphere radius={getRadius(width).three} />
+                    <ThreeGraticule radius={getRadius(width).three} />
                   </Canvas>
                 </Fragment>
               ) : null}
