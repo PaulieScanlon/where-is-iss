@@ -1,0 +1,1 @@
+export { Octocat } from './octocat'

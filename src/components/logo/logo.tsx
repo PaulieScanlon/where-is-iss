@@ -1,20 +1,45 @@
 /** @jsx jsx */
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { jsx, Box } from 'theme-ui'
+import { useSpring, animated } from 'react-spring'
 import { fromUnixTime, format } from 'date-fns'
 
 import { IContextProps } from '../../types'
+
+interface ICountdownProps {
+  duration: number
+}
+
+const Countdown: FunctionComponent<ICountdownProps> = ({ duration }) => {
+  const { number } = useSpring({
+    from: { number: duration },
+    number: 0,
+    config: { duration: duration },
+  })
+
+  return (
+    <animated.text transform="matrix(1 0 0 1 404 378)">
+      {number.to((n) => `${Math.round(n)}s`)}
+    </animated.text>
+  )
+}
 
 interface ILogoProps extends IContextProps {}
 
 export const Logo: FunctionComponent<ILogoProps> = ({ issNow }) => {
   const { timestamp, latitude, longitude } = issNow
-  console.log(fromUnixTime(timestamp))
+
+  const [trigger, setTrigger] = useState(0)
+
+  useEffect(() => {
+    setTrigger(issNow ? issNow.timestamp : 1)
+  }, [issNow])
 
   return (
     <Box
       sx={{
-        width: ['60%', '60%', '60%', '80%'],
+        mb: 4,
+        width: '100%',
       }}
     >
       <svg
@@ -25,7 +50,7 @@ export const Logo: FunctionComponent<ILogoProps> = ({ issNow }) => {
         y="0px"
         width="100%"
         height="100%"
-        viewBox="0 0 860 600"
+        viewBox="0 0 900 600"
         sx={{
           text: {
             fontFamily: 'body',
@@ -116,9 +141,10 @@ export const Logo: FunctionComponent<ILogoProps> = ({ issNow }) => {
           <text transform="matrix(1 0 0 1 550 265)">{latitude}</text>
           <text transform="matrix(1 0 0 1 404 297)">longitude: </text>
           <text transform="matrix(1 0 0 1 550 297)">{longitude}</text>
-          <text transform="matrix(1 0 0 1 404 330)">
+          <text transform="matrix(1 0 0 1 404 332)">
             {format(fromUnixTime(timestamp), "dd-MMM-yyyy '|' hh:mm:ss")}
           </text>
+          <Countdown key={`${trigger}-countdown`} duration={5000} />
           <g>
             <g>
               <defs>

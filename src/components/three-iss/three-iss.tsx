@@ -27,10 +27,10 @@ export const ThreeIss: FunctionComponent<IThreeIssProps> = ({
         <Fragment>
           <mesh
             ref={mesh}
-            position={getVertex(latitude, longitude, radius + 10)}
+            position={getVertex(latitude, longitude, radius + 20)}
           >
-            <sphereGeometry args={[2.5, 24, 8]} />
-            <meshBasicMaterial color={theme.colors.three.iss} />
+            <sphereGeometry args={[3, 24, 8]} />
+            <meshLambertMaterial color={theme.colors.three.iss} />
           </mesh>
         </Fragment>
       ) : null}

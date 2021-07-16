@@ -2,28 +2,10 @@
 import { FunctionComponent, useState } from 'react'
 import { jsx, Box } from 'theme-ui'
 import { useSpring, animated } from 'react-spring'
-import { IContextProps, IssNow } from '../../types'
+import { IContextProps } from '../../types'
 import { useEffect } from 'react'
 
 import AppContext from '../../context/app-context'
-
-// interface ICountdownProps {
-//   duration: number
-// }
-
-// const Countdown: FunctionComponent<ICountdownProps> = ({ duration }) => {
-//   const { number } = useSpring({
-//     from: { number: duration },
-//     number: 0,
-//     config: { duration: duration },
-//   })
-
-//   return (
-//     <animated.text x="50%" y="50%" textAnchor="middle">
-//       {number.to((n) => `${Math.round(n)}s`)}
-//     </animated.text>
-//   )
-// }
 
 interface ITickerCircleProps {
   duration: number
@@ -140,7 +122,7 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({
                 cx="20"
                 cy="20"
                 r="16"
-                opacity={0.8}
+                opacity={0.7}
                 strokeWidth="1"
                 strokeDasharray={0.15}
               />
@@ -150,40 +132,4 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({
       }}
     </AppContext.Consumer>
   )
-}
-
-{
-  /* <circle
-          sx={{
-            stroke: 'text',
-            fill: 'transparent',
-            transformOrigin: 'center',
-            transform: `rotate(${counter}deg)`,
-            transition: '.3s linear all',
-          }}
-          cx="20"
-          cy="20"
-          r="15.91549430918954"
-          opacity={0.2}
-          strokeWidth="2"
-          strokeDasharray={0.2}
-        /> */
-}
-{
-  /* <circle
-          sx={{
-            stroke: 'text',
-            fill: 'transparent',
-            // transformOrigin: 'center',
-            // transform: `rotate(${counter}deg)`,
-            transition: '5s ease-in-out all',
-          }}
-          cx="20"
-          cy="20"
-          r="15.91549430918954"
-          opacity={0.2}
-          strokeWidth="2"
-          strokeDasharray={1000}
-          strokeDashoffset={strokeValue}
-        /> */
 }

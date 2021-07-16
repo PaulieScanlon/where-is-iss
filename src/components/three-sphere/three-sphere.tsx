@@ -16,7 +16,7 @@ export const ThreeSphere: FunctionComponent<IThreeSphereProps> = ({
       <meshPhongMaterial
         color={theme.colors.three.sphere}
         transparent={true}
-        opacity={0.7}
+        opacity={0.2}
       />
     </mesh>
   )

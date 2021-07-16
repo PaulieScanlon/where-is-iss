@@ -12,6 +12,7 @@ import { ThreeGeo } from '../three-geo'
 import { ThreeIss } from '../three-iss'
 import { ThreeSphere } from '../three-sphere'
 import { ThreeGraticule } from '../three-graticule'
+import { ThreeGlitch } from '../three-glitch'
 
 import theme from '../../gatsby-plugin-theme-ui'
 
@@ -44,9 +45,9 @@ export const ThreeScene: FunctionComponent<IThreeSceneProps> = ({
                 <Fragment>
                   <FrameTimer issNow={issNow} width={svg} />
                   <Canvas
-                    gl={{ antialias: false, alpha: false }}
+                    gl={{ antialias: false, alpha: true }}
                     onCreated={({ gl }) => {
-                      gl.setClearColor(theme.colors.three.canvas)
+                      // gl.setClearColor(theme.colors.three.canvas)
                     }}
                     camera={{
                       fov: 45,
@@ -58,6 +59,7 @@ export const ThreeScene: FunctionComponent<IThreeSceneProps> = ({
                       cursor: 'move',
                     }}
                   >
+                    <ThreeGlitch issNow={issNow} />
                     {/* @ts-ignore */}
                     <OrbitControls
                       enableRotate={true}
@@ -66,12 +68,17 @@ export const ThreeScene: FunctionComponent<IThreeSceneProps> = ({
                     />
                     <pointLight
                       color={theme.colors.three.pointLight}
-                      position={[0, 0, -100000]}
-                      intensity={1}
+                      position={[350, 0, -500]}
+                      intensity={0.2}
+                    />
+                    <pointLight
+                      color={theme.colors.three.pointLight}
+                      position={[-350, 0, 500]}
+                      intensity={0.2}
                     />
                     <ambientLight
                       color={theme.colors.three.ambientLight}
-                      intensity={1.4}
+                      intensity={0.4}
                     />
                     <ThreeGeo radius={radius} />
                     <ThreeIss

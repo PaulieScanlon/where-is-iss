@@ -3,27 +3,14 @@ const theme = {
     text: '#000000',
     background: '#ffffff',
     primary: '#ff4de8',
+    secondary: '#ffd440',
     three: {
       iss: '#000000',
-
-      // frame: '#ffd440',
       frame: '#ffffff',
-
-      // geo: '#a0a0a0',
-      // graticule: '#fefefe',
-      // sphere: '#fefefe',
-      // geo: '#cc33cc',
-      // graticule: '#3d3d3d',
-      geo: '#ffffff',
-      // geo: '#ffd440',
-      // geo: '#000000',
-
-      graticule: '#fe6aeb',
-      // sphere: '#ffffff',
-      sphere: '#fd53e7',
-
+      geo: '#e753e7',
+      graticule: '#ffffff',
+      sphere: '#ffffff',
       ambientLight: '#ffffff',
-      // directonalLight: '#ffffff',
       pointLight: '#ffffff',
       canvas: '#ff4de8',
     },
@@ -50,6 +37,12 @@ const theme = {
     root: {
       fontFamily: 'body',
       m: 0,
+    },
+    a: {
+      color: 'text',
+      ':hover': {
+        color: 'primary',
+      },
     },
   },
 }
