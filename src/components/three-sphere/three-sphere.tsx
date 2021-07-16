@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react'
 
+import theme from '../../gatsby-plugin-theme-ui'
+
 interface IThreeSphereProps {
   /** The radius to use */
   radius: number
@@ -12,10 +14,9 @@ export const ThreeSphere: FunctionComponent<IThreeSphereProps> = ({
     <mesh>
       <sphereGeometry args={[radius, 32, 32]} />
       <meshPhongMaterial
-        color={0x000000}
+        color={theme.colors.three.sphere}
         transparent={true}
-        opacity={0.6}
-        shininess={1}
+        opacity={0.7}
       />
     </mesh>
   )

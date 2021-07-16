@@ -1,8 +1,7 @@
 import React, { Fragment, FunctionComponent } from 'react'
-import { Box } from 'theme-ui'
+import { Flex } from 'theme-ui'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-import { useResizeDetector } from 'react-resize-detector'
 
 import { IContextProps } from '../../types'
 
@@ -16,53 +15,34 @@ import { ThreeGraticule } from '../three-graticule'
 
 import theme from '../../gatsby-plugin-theme-ui'
 
-export const ThreeScene: FunctionComponent = () => {
-  const getRadius = (width) => {
-    if (width < 576) {
-      // small
-      return {
-        svg: 320,
-        three: 40,
-      }
-    } else if (width < 756) {
-      // medium
-      return {
-        svg: 570,
-        three: 70,
-      }
-    }
-    // large
-    else
-      return {
-        svg: 800,
-        three: 90,
-      }
-  }
+interface IThreeSceneProps {
+  /** Radius for Three.js */
+  radius: number
+  /** Width for the svg */
+  svg: number
+}
 
-  const { width, ref } = useResizeDetector({
-    handleHeight: false,
-    refreshMode: 'debounce',
-    refreshRate: 500,
-  })
-
+export const ThreeScene: FunctionComponent<IThreeSceneProps> = ({
+  radius,
+  svg,
+}) => {
   return (
-    <Box
-      ref={ref}
+    <Flex
       sx={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        zIndex: -1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        width: '100%',
       }}
     >
-      {' '}
       <AppContext.Consumer>
         {({ issNow, isLoading }: IContextProps) => {
           return (
             <Fragment>
               {!isLoading ? (
                 <Fragment>
-                  <FrameTimer issNow={issNow} width={getRadius(width).svg} />
+                  <FrameTimer issNow={issNow} width={svg} />
                   <Canvas
                     gl={{ antialias: false, alpha: false }}
                     onCreated={({ gl }) => {
@@ -72,7 +52,11 @@ export const ThreeScene: FunctionComponent = () => {
                       fov: 45,
                       position: [0, 0, 300],
                     }}
-                    style={{ width: '100vw', height: '100vh', cursor: 'move' }}
+                    style={{
+                      width: theme.sizes.canvas,
+                      height: theme.sizes.canvas,
+                      cursor: 'move',
+                    }}
                   >
                     {/* @ts-ignore */}
                     <OrbitControls
@@ -80,15 +64,23 @@ export const ThreeScene: FunctionComponent = () => {
                       enableZoom={false}
                       enablePan={false}
                     />
-                    <ambientLight color={theme.colors.three.point} />
-                    <ThreeGeo radius={getRadius(width).three} />
+                    <pointLight
+                      color={theme.colors.three.pointLight}
+                      position={[0, 0, -100000]}
+                      intensity={1}
+                    />
+                    <ambientLight
+                      color={theme.colors.three.ambientLight}
+                      intensity={1.4}
+                    />
+                    <ThreeGeo radius={radius} />
                     <ThreeIss
                       isLoading={isLoading}
                       issNow={issNow}
-                      radius={getRadius(width).three}
+                      radius={radius}
                     />
-                    <ThreeSphere radius={getRadius(width).three} />
-                    <ThreeGraticule radius={getRadius(width).three} />
+                    <ThreeGraticule radius={radius} />
+                    <ThreeSphere radius={radius} />
                   </Canvas>
                 </Fragment>
               ) : null}
@@ -96,6 +88,6 @@ export const ThreeScene: FunctionComponent = () => {
           )
         }}
       </AppContext.Consumer>
-    </Box>
+    </Flex>
   )
 }

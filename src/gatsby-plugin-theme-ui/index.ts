@@ -1,21 +1,49 @@
 const theme = {
   colors: {
-    text: '#ffffff',
-    background: '#000000',
+    text: '#000000',
+    background: '#ffffff',
+    primary: '#ff4de8',
     three: {
-      // point: '#15d7e8',
-      point: '#f527b9',
-      frame: '#f527b9',
-      // geo: '#bb4699',
-      geo: '#9f65b0',
-      graticule: '#542c60',
-      timer: '#cc1697',
-      canvas: '#000000',
+      iss: '#000000',
+
+      // frame: '#ffd440',
+      frame: '#ffffff',
+
+      // geo: '#a0a0a0',
+      // graticule: '#fefefe',
+      // sphere: '#fefefe',
+      // geo: '#cc33cc',
+      // graticule: '#3d3d3d',
+      geo: '#ffffff',
+      // geo: '#ffd440',
+      // geo: '#000000',
+
+      graticule: '#fe6aeb',
+      // sphere: '#ffffff',
+      sphere: '#fd53e7',
+
+      ambientLight: '#ffffff',
+      // directonalLight: '#ffffff',
+      pointLight: '#ffffff',
+      canvas: '#ff4de8',
     },
   },
 
   fonts: {
     body: 'system-ui',
+  },
+
+  shadows: ['0px 0px 40px 10px #dadada'],
+
+  sizes: {
+    container: ['100%', 1140],
+    canvas: 576,
+  },
+
+  layout: {
+    container: {
+      px: [0, 0, 0, 4],
+    },
   },
 
   styles: {

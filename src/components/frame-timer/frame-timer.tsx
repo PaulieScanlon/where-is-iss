@@ -41,7 +41,7 @@ const TickerCircle: FunctionComponent<ITickerCircleProps> = ({ duration }) => {
       cx="20"
       cy="20"
       r="16"
-      opacity={0.3}
+      opacity={0.8}
       strokeWidth="0.5"
       strokeDasharray={100}
       strokeDashoffset={100}
@@ -82,8 +82,7 @@ const PulseCircle: FunctionComponent<ICirclePulseProps> = ({
   )
 }
 
-interface IFrameTimerProps {
-  issNow: IssNow
+interface IFrameTimerProps extends IContextProps {
   /** The width to use */
   width: number
 }
@@ -105,19 +104,15 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({
           <Box
             sx={{
               position: 'absolute',
-              top: 0,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              // width: '100vw',
-              height: '100vh',
               zIndex: 1,
               pointerEvents: 'none',
+              overflow: 'hidden',
               svg: {
-                text: {
-                  fontSize: '1px',
-                  fontFamily: 'body',
-                  fill: 'three.timer',
-                },
+                // text: {
+                //   fontSize: '1px',
+                //   fontFamily: 'body',
+                //   fill: 'three.timer',
+                // },
                 circle: {
                   stroke: 'three.frame',
                   fill: 'transparent',
@@ -127,7 +122,7 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({
               },
             }}
           >
-            <svg width={width} height="auto" viewBox="0 0 40 40">
+            <svg width={width} height="100%" viewBox="0 0 40 40">
               <TickerCircle key={`${trigger}-ticker`} duration={pollDelay} />
               <PulseCircle key={`${trigger}-pulse-a`} />
               <PulseCircle
@@ -145,7 +140,7 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({
                 cx="20"
                 cy="20"
                 r="16"
-                opacity={0.35}
+                opacity={0.8}
                 strokeWidth="1"
                 strokeDasharray={0.15}
               />

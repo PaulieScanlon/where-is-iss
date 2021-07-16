@@ -9,29 +9,32 @@ import axios from 'axios'
 
 import { IContextProps, IssNow } from '../types'
 
+const defaultState = {
+  timestamp: 0,
+  latitude: 0,
+  longitude: 0,
+
+  isLoading: true,
+}
+
 const AppContext = createContext<IContextProps>({
   issNow: {
-    message: '',
-    timestamp: 0,
-    iss_position: {
-      latitude: 0,
-      longitude: 0,
-    },
+    ...defaultState,
   },
-  isLoading: true,
 })
 
 export const AppProvider: FunctionComponent = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [issNow, setIssNow] = useState<IssNow>()
+  const [issNow, setIssNow] = useState<IssNow>({ ...defaultState })
   const [pollDelay] = useState(5000)
 
   const poll = () => {
     axios
       .get('/api/iss-now')
       .then((response) => {
+        setIssNow(response.data.iss_now)
         setIsLoading(false)
-        setIssNow(response.data.data)
+        // console.log(response.data.iss_now)
       })
       .catch((error) => {
         console.log(error)

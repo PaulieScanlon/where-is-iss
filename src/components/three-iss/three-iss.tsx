@@ -19,16 +19,7 @@ export const ThreeIss: FunctionComponent<IThreeIssProps> = ({
 }) => {
   const mesh = useRef<THREE.Mesh>(null!)
 
-  const rotationSpeed = 0.004
-  const { iss_position } = issNow
-
-  useFrame(() => {
-    return (
-      (mesh.current.rotation.x += rotationSpeed),
-      (mesh.current.rotation.y += rotationSpeed),
-      (mesh.current.rotation.z += rotationSpeed)
-    )
-  })
+  const { latitude, longitude } = issNow
 
   return (
     <Fragment>
@@ -36,16 +27,10 @@ export const ThreeIss: FunctionComponent<IThreeIssProps> = ({
         <Fragment>
           <mesh
             ref={mesh}
-            position={getVertex(
-              iss_position.latitude,
-              iss_position.longitude,
-              radius + 20
-            )}
+            position={getVertex(latitude, longitude, radius + 10)}
           >
-            <sphereGeometry args={[2, 24, 8]} />
-            {/* <cylinderGeometry args={[2, 2, 2, 12]} /> */}
-            {/* <torusGeometry args={[4, 2, 24, 24]} /> */}
-            <meshPhongMaterial color={theme.colors.three.point} />
+            <sphereGeometry args={[2.5, 24, 8]} />
+            <meshBasicMaterial color={theme.colors.three.iss} />
           </mesh>
         </Fragment>
       ) : null}
