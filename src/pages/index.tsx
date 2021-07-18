@@ -1,5 +1,5 @@
 import React, { Fragment, FunctionComponent } from 'react'
-import { Grid, Flex, Box, Link, Container, Text } from 'theme-ui'
+import { Grid, Flex, Box, Link, Container, Text, Spinner } from 'theme-ui'
 import { useResizeDetector } from 'react-resize-detector'
 
 import { IContextProps } from '../types'
@@ -48,6 +48,7 @@ const IndexPage: FunctionComponent = () => {
             boxShadow: 0,
             gap: 0,
             gridTemplateColumns: ['1fr', '1fr', '1fr', '1fr 1fr'],
+            minHeight: 'canvas',
           }}
         >
           <Flex
@@ -160,7 +161,9 @@ const IndexPage: FunctionComponent = () => {
                           </Grid>
                         </Flex>
                       </Fragment>
-                    ) : null}
+                    ) : (
+                      <Spinner />
+                    )}
                   </Flex>
                 )
               }}
