@@ -11,6 +11,8 @@ interface ITickerCircleProps {
   duration: number
 }
 
+const RADIUS = 15.91549430918954
+
 const TickerCircle: FunctionComponent<ITickerCircleProps> = ({ duration }) => {
   const props = useSpring({
     strokeDashoffset: 100,
@@ -22,7 +24,7 @@ const TickerCircle: FunctionComponent<ITickerCircleProps> = ({ duration }) => {
     <animated.circle
       cx="20"
       cy="20"
-      r="16"
+      r={RADIUS}
       opacity={0.8}
       strokeWidth="0.5"
       strokeDasharray={100}
@@ -56,7 +58,7 @@ const PulseCircle: FunctionComponent<ICirclePulseProps> = ({
     <animated.circle
       cx="20"
       cy="20"
-      r="16"
+      r={RADIUS}
       strokeWidth={0.5}
       strokeLinecap="round"
       style={props}
@@ -86,15 +88,12 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({
           <Box
             sx={{
               position: 'absolute',
+              top: '50%',
+              transform: 'translateY(-50%)',
               zIndex: 1,
               pointerEvents: 'none',
               overflow: 'hidden',
               svg: {
-                // text: {
-                //   fontSize: '1px',
-                //   fontFamily: 'body',
-                //   fill: 'three.timer',
-                // },
                 circle: {
                   stroke: 'three.frame',
                   fill: 'transparent',
@@ -121,7 +120,7 @@ export const FrameTimer: FunctionComponent<IFrameTimerProps> = ({
               <circle
                 cx="20"
                 cy="20"
-                r="16"
+                r={RADIUS}
                 opacity={0.7}
                 strokeWidth="1"
                 strokeDasharray={0.15}

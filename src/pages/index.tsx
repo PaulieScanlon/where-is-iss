@@ -21,7 +21,7 @@ const IndexPage: FunctionComponent = () => {
     // large
     else
       return {
-        svg: 560,
+        svg: 570,
         radius: 90,
       }
   }
